@@ -58,7 +58,11 @@ if(req.file){
      fs.rm(`uploads/${req.file.filename}`)
     }
   } catch (err) {
-   return next(new AppError(err || 'File not uploaded, please try again', 400))
+    console.error('File Upload Error:', err); // Log detailed error for debugging
+
+    // If `err` is an object, extract its `message` property; otherwise, use a default message
+    const errorMessage = err?.message || 'File not uploaded, please try again';
+   return next(new AppError(errorMessage || 'File not uploaded, please try again', 400))
   }
 }
 
@@ -82,7 +86,7 @@ res.status(201).json({
 const login = async(req, res, next)=>{
   try {
     const {email, password} = req.body
-    if(!email || password){
+    if(!email || !password){
       return next(new AppError('All fields are required', 400))
     }
     const user = await User.findOne({
@@ -109,11 +113,11 @@ const login = async(req, res, next)=>{
   }
  
 }
-const logout = (resq, res)=>{
-    response.cookie('token', null, {
+const logout = async(_req, res)=>{
+    res.cookie('token', null, {
       maxAge:0,
       httpOnly:true,
-      secure:true
+      secure:process.env.NODE_ENV === 'production' ? true : false,
     })
 
     res.status(200).json({
@@ -124,7 +128,7 @@ const logout = (resq, res)=>{
 }
 const getProfile = async(req, res)=>{
   try {
-    const userId = req.user.userId
+    const userId = req.user.id
     // from middleware we will get thid id
     const user = await User.findById(userId)
 
@@ -220,7 +224,7 @@ const changePassword = async(req, res, next)=>{
     return next(new AppError('Invalid user id or user does not exist', 400));
   }
   const isPasswordValid = await User.comparePassword(oldPassword)
-  if (!oldPassword) {
+  if (!isPasswordValid) {
     return next(new AppError('', 400));
   }
     // Setting the new password
@@ -235,15 +239,15 @@ const changePassword = async(req, res, next)=>{
     })
 
 }
-const updateUser = async(req, res)=>{
+const updateUser = async(req, res, next)=>{
    const {fullName} = req.body
-   const {id} = req.user.id
+   const {id} = req.params;
 
    const user = await User.findById(id)
    if(!user){
     return next(new AppError('User  does not exist', 400))
    }
-   if(req.fullName){
+   if(fullName){
     user.fullName = fullName
    }
     // Run only if user sends a file

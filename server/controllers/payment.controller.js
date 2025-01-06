@@ -1,6 +1,7 @@
 import AppError from "../utils/error.util.js"
 import {razorpay} from '../server.js'
 import crypto from 'crypto'
+import Payment from '../models/payment.model.js'
 import User from "../models/user.model.js"
 
 export const getRazorPayApiKey = async(req, res, next)=>{
@@ -17,9 +18,12 @@ export const getRazorPayApiKey = async(req, res, next)=>{
 }
 
 export const buySubscription = async(req, res, next)=>{
+  console.log('RAZORPAY_PLAN_ID:', process.env.RAZORPAY_PLAN_ID);
       try {
         const  {id} = req.user
       const user = await User.findById(id)
+      console.log("subscription user", user);
+      
       if(!user){
         return next(
            new AppError('Unauthorized, please login', 500)
@@ -30,10 +34,13 @@ export const buySubscription = async(req, res, next)=>{
        return next( new AppError('ADMIN cannot purchase a subscription', 400))
       }
 
-      const subscription = await razorpay.subscription.create({
+      const subscription = await razorpay.subscriptions.create({
         plan_id:process.env.RAZORPAY_PLAN_ID,
-        cutomer_notify:1
+        customer_notify: 1,
+        total_count: 12,
       })
+      console.log("RAZORPAY_PLAN_ID:", process.env.RAZORPAY_PLAN_ID);
+      
       user.subscription.id = subscription.id
       user.subscription.status = subscription.status
 
@@ -44,6 +51,7 @@ export const buySubscription = async(req, res, next)=>{
         subscription_id:subscription.id
       })
       } catch (error) {
+        console.error('Razorpay Subscription Creation Error:', error);
         return next(new AppError(error.message, 500))
       }
 }

@@ -38,7 +38,7 @@ const userSchema = new Schema ({
   role:{
    type:'String',
    enum:['USER', 'ADMIN'],
-   default:'USER'
+   default:'ADMIN'
   },
   forgotPasswordToken:String,
   forgotPasswordExpiry:Date,
@@ -74,7 +74,7 @@ userSchema.methods = {
   },
   comparePassword:async function(plainTextPassword){
     // bcrypt is a async job 
-   return await bcrypt.comparePassword(plainTextPassword, this.password)
+   return await bcrypt.compare(plainTextPassword, this.password)
   },
   generatePasswordResetToken: async function (){
     const resetToken = await crypto.randomBytes(20).toString('hex')

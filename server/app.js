@@ -6,6 +6,7 @@ import morgan from 'morgan'
 import userRoutes from './routes/user.routes.js'
 import courseRoutes from './routes/course.routes.js'
 import paymentRoutes from './routes/payment.route.js'
+import miscRoutes from './routes/miscellaneous.routes.js';
 import errorMiddleware from './middlewares/error.middleware.js'
 
 config()
@@ -20,13 +21,14 @@ app.use(cors({
 app.use(cookieParser())
 app.use(morgan('dev'))
 // to check the server is up or down
-app.use('/ping', function(req, res){
+app.use('/ping', function(_req, res){
   res.send('Pong')
 })
 // module 3 routes
 app.use('/api/v1/user', userRoutes)
 app.use('/api/v1/courses', courseRoutes)
-app.use('/api/v1/payment', paymentRoutes)
+app.use('/api/v1/payments', paymentRoutes)
+app.use('/api/v1', miscRoutes);
 
 app.all('*', (_req, res)=>{
     res.status(404).send('OOPS! 404 page not found')

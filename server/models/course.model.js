@@ -30,7 +30,7 @@ const courseSchema = new Schema ({
     },
     lectures:[
         {
-        tiltle:String,
+        title:String,
         description:String,
         lecture:{
             public_id:{

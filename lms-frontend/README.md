@@ -34,7 +34,7 @@
 
 3. Add file extensions to tailwind config file in the contents property
 `````````
- "./src/**/*.{html,js, jsx, ts, tsx}"
+ " ./src/**/*.{html,js, jsx, ts, tsx}", "./index.html",
 ``````````
 
 4. Add the tailwind directive at the top of `index.css` file
@@ -45,14 +45,19 @@
   @tailwind utilities;
 
 ````````````
+5. Add the following detail in the plugin property of the tailwindconfig
+`````
+  [require("daisyui"), require("@tailwindcss/line-clamp")],
+`````
+
 
 ### Adding plugins and dependencies
 
-````````````````
+````````
 npm install @reduxjs/toolkit react-redux react-router-dom react-icons react-chartjs-2 chart.js daisyui axios react-hot-toast @tailwindcss/line-clamp
 ````````````
 
-## configure auto import sort eslit
+## configure auto import sort eslint
 
 1. Install simple import sort
 ````
