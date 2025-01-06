@@ -38,7 +38,7 @@ function HomePage(){
 
                <img alt='homepage' src={ homePageMainImage} />
 
-               <img alt='homepage' src={homePageMainImage} />
+              
 
            
                </div>
