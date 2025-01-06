@@ -1,7 +1,8 @@
 import HomeLayout from "../Layouts/HomeLayout";
-import aboutMainImage from "../Assets/Images/aboutMainImage.png"
+// import aboutMainImage from "../Assets/Images/aboutMainImage.png"
 import { celebrities } from "../Constants/celebrityData";
 import CarouselSlide from "../Components/CarouselSlide";
+const aboutMainImage = "/Assets/Images/aboutMainImage.png";
 
 
 function AboutUs(){
