@@ -35,11 +35,11 @@ function HomePage(){
                </div>
 
                <div className='w-1/2 flex items-center justify-center'>
-<<<<<<< HEAD
+
                <img alt='homepage' src={ homePageMainImage} />
-=======
+
                <img alt='homepage' src={homePageMainImage} />
->>>>>>> 4b7738b55fc1ab8a47c7731ad40cdab68c9196fd
+
            
                </div>
             </div>
