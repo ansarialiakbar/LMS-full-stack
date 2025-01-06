@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom';
 import HomeLayout from '../Layouts/HomeLayout'
+<<<<<<< HEAD
 const homePageMainImage = '/Assets/Images/homePageMainImage.png';;
 
+=======
+import homePageMainImage from '../Assets/Images/homePageMainImage.png';
+>>>>>>> 4b7738b55fc1ab8a47c7731ad40cdab68c9196fd
 function HomePage(){
     return(
         <HomeLayout>
@@ -32,7 +36,11 @@ function HomePage(){
                </div>
 
                <div className='w-1/2 flex items-center justify-center'>
+<<<<<<< HEAD
                <img alt='homepage' src={ homePageMainImage} />
+=======
+               <img alt='homepage' src={homePageMainImage} />
+>>>>>>> 4b7738b55fc1ab8a47c7731ad40cdab68c9196fd
            
                </div>
             </div>
