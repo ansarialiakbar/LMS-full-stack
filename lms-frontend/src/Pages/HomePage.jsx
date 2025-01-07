@@ -26,7 +26,7 @@ function HomePage() {
                         </Link>
 
                         <Link to="/contact">
-                            <button className=" bg-slate-400 px-5 py-3 rounded-md font-semibold text-lg cursor-pointer hover:bg-yellow-700 transition-all ease-in-out duration-300">
+                        <button className=" bg-slate-400 px-5 py-3 rounded-md font-semibold text-lg cursor-pointer hover:bg-yellow-700 transition-all ease-in-out duration-300">
                                 Contact Us
                             </button>
                         </Link>
@@ -42,4 +42,6 @@ function HomePage() {
     );
 }
 
+
 export default HomePage;
+

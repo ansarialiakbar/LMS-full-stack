@@ -43,12 +43,9 @@ function AboutUs() {
                                                                 />))}
                     
                 </div>
-
-
-            </div>
+                </div>
         </HomeLayout>  
     );
 }   
-
 
 export default AboutUs;
