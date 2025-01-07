@@ -1,5 +1,9 @@
 import HomeLayout from "../Layouts/HomeLayout";
+<<<<<<< HEAD
 // import aboutMainImage from "../Assets/Images/aboutMainImage.png"
+=======
+const aboutMainImage = "/Assets/Images/aboutMainImage.png";
+>>>>>>> c2db5338c16182f68b77e54a6c1ba290b7a25cde
 import { celebrities } from "../Constants/celebrityData";
 import CarouselSlide from "../Components/CarouselSlide";
 const aboutMainImage = "/Assets/Images/aboutMainImage.png";
