@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL = "https://lms-backend-j6l4.onrender.com";
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 const axiosInstance = axios.create();
 axiosInstance.defaults.baseURL = BASE_URL;
