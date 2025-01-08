@@ -30,6 +30,10 @@ app.use(cors({
 }))
 app.use(cookieParser())
 app.use(morgan('dev'))
+
+app.get("/", (_req, res) => {
+  res.send("Welcome to the server!");
+});
 // to check the server is up or down
 app.use('/ping', function(_req, res){
   res.send('Pong')
