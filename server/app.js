@@ -1,5 +1,9 @@
 import {config} from 'dotenv'
 import express from 'express'
+import favicon from 'serve-favicon';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import path from 'path';
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 import morgan from 'morgan'
@@ -11,6 +15,12 @@ import errorMiddleware from './middlewares/error.middleware.js'
 
 config()
 const app = express()
+// Get the current directory path
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Serve the favicon
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico.png')));
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true })) /* this urlencoded is helpful in to extract query params and parsing  */
