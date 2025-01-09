@@ -21,13 +21,14 @@ import CheckoutSuccess from './Pages/Payment/CheckoutSuccess';
 import Signup from './Pages/Signup';
 import EditProfile from './Pages/User/EditProfile';
 import Profile from './Pages/User/Profile';
+import ChangePassword from './Pages/User/ChangePassword';
 function App() {
 
   return (
     <>
       <Routes>
         <Route path="/" element={<HomePage />} ></Route>
-        <Route path="/about" element={<AboutUs />} ></Route>\
+        <Route path="/about" element={<AboutUs />} ></Route>
         <Route path="/courses" element={<CourseList />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/denied" element={<Denied />} />
@@ -46,6 +47,7 @@ function App() {
         <Route element={<RequireAuth allowedRoles={["ADMIN", "USER"]} />}>
           <Route path='/user/profile' element={<Profile />} />
           <Route path='/user/editprofile' element={<EditProfile />} />
+          <Route path='/user/changepassword' element={<ChangePassword />} />
           <Route path='/checkout' element={<Checkout />} />
           <Route path='/checkout/success' element={<CheckoutSuccess />} />
           <Route path='/checkout/fail' element={<CheckoutFailure />} />
