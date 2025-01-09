@@ -3,7 +3,7 @@ const billGates =  "/Assets/Images/billGates.png"
 const einstein =  "/Assets/Images/einstein.png"
 const nelsonMandela =  "/Assets/Images/nelsonMandela.png"
 const steveJobs =  "/Assets/Images/steveJobs.png"
-export const celebrities = [
+export  const celebrities = [
     {
       title:"Nelson Mandela",
       description:"Education is the most powerfull tool you can use to change the world.",

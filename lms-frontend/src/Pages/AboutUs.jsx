@@ -1,6 +1,7 @@
 const aboutMainImage = "/Assets/Images/aboutMainImage.png";
 import CarouselSlide from "../Components/CarouselSlide";
-import { celebrities } from "../Constants/CelebrityData";
+import { celebrities } from "../Constants/celebrities";
+// import { celebrities } from "../Constants/CelebrityData";
 import HomeLayout from "../Layouts/HomeLayout";
 
 function AboutUs() {
