@@ -211,34 +211,49 @@ const resetPassword = async(req, res, next)=>{
       message:'Password changed successfully'
     })
 }
-const changePassword = async(req, res, next)=>{
-   const {oldPassword, newPassword} = req.body
-   const {id}  = req.user // because of the middleware isLoggedIn
-   if(!oldPassword || !newPassword){
-    new AppError('All fields are required', 400)
-   }
-    // Finding the user by ID and selecting the password
-    const user = await User.findById(id).select('+password')
-     // If no user then throw an error message
-  if (!user) {
-    return next(new AppError('Invalid user id or user does not exist', 400));
-  }
-  const isPasswordValid = await User.comparePassword(oldPassword)
-  if (!isPasswordValid) {
-    return next(new AppError('', 400));
-  }
-    // Setting the new password
-    user.password = newPassword;
+const changePassword = async (req, res, next) => {
+  try {
+      const { oldPassword, newPassword } = req.body;
+      const { id } = req.user; // Populated by `isLoggedIn` middleware
 
-    // Save the data in DB
-    await user.save();
-    user.password = undefined
-    res.status(200).json({
-      success:true,
-      message:'Password changed successfully'
-    })
+      if (!oldPassword || !newPassword) {
+          return next(new AppError('All fields are required', 400));
+      }
 
-}
+      // Find user and select password field (as it's set to `select: false` in schema)
+      const user = await User.findById(id).select('+password');
+      if (!user) {
+          return next(new AppError('Invalid user ID or user does not exist', 404));
+      }
+
+      // Debug log: Ensure password field is retrieved
+      console.log("User Password from DB:", user.password);
+
+      // Check if the old password matches
+      const isPasswordValid = await user.comparePassword(oldPassword);
+      if (!isPasswordValid) {
+        console.log("Old Password:", oldPassword);
+        console.log("Hashed Password from DB:", user.password);
+        return next(new AppError('Old password is incorrect', 400));
+      }
+
+      // Update the password
+      user.password = newPassword;
+
+      // Save the user (password hashing will happen due to `pre('save')` hook)
+      await user.save();
+
+      // Respond with success
+      res.status(200).json({
+          success: true,
+          message: 'Password changed successfully',
+      });
+  } catch (error) {
+      // Pass unexpected errors to the global error handler
+      next(new AppError(error.message || 'Something went wrong!', 500));
+  }
+};
+
 const updateUser = async(req, res, next)=>{
    const {fullName} = req.body
    const {id} = req.params;

@@ -58,6 +58,7 @@ userSchema.pre('save', async function(next){
     return next()
   }
   // hash is a async 
+  console.log('Hashing Password:', this.password); // Debug log
   this.password = await bcrypt.hash(this.password, 10)
 }) 
 // generic method
@@ -74,6 +75,7 @@ userSchema.methods = {
   },
   comparePassword:async function(plainTextPassword){
     // bcrypt is a async job 
+    console.log('Stored Hashed Password:', this.password); // Debug log
    return await bcrypt.compare(plainTextPassword, this.password)
   },
   generatePasswordResetToken: async function (){

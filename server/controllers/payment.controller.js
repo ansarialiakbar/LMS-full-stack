@@ -18,7 +18,7 @@ export const getRazorPayApiKey = async(req, res, next)=>{
 }
 
 export const buySubscription = async(req, res, next)=>{
-  console.log('RAZORPAY_PLAN_ID:', process.env.RAZORPAY_PLAN_ID);
+  
       try {
         const  {id} = req.user
       const user = await User.findById(id)
