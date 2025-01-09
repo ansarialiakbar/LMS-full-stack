@@ -22,6 +22,12 @@ const __dirname = dirname(__filename);
 // Serve the favicon
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico.png')));
 
+app.use((req, res, next) => {
+  console.log(`Request received from origin: ${req.headers.origin}`);
+  console.log(`Allowed origin: ${process.env.CLIENT_URL}`);
+  next();
+});
+
 app.use(express.json())
 app.use(express.urlencoded({extended: true })) /* this urlencoded is helpful in to extract query params and parsing  */
 app.use(cors({
