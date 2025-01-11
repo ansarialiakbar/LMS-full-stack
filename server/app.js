@@ -30,10 +30,15 @@ app.use((req, res, next) => {
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true })) /* this urlencoded is helpful in to extract query params and parsing  */
-app.use(cors({
-    origin:[process.env.CLIENT_URL],
-    credentials:true
-}))
+// CORS Configuration
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL, // Your frontend's domain
+    credentials: true, // Allow cookies and credentials
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Customize as needed
+  })
+);
 app.use(cookieParser())
 app.use(morgan('dev'))
 
