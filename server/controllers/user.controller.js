@@ -55,7 +55,7 @@ if(req.file){
       user.avatar.secure_url = result.secure_url
       // Remove file from server (delete file from local )
       // humhe cloudinary me rakhni hai file
-     fs.rm(`uploads/${req.file.filename}`)
+      await fs.rm(`uploads/${req.file.filename}`)
     }
   } catch (err) {
     console.error('File Upload Error:', err); // Log detailed error for debugging
@@ -281,7 +281,7 @@ const updateUser = async(req, res, next)=>{
           user.avatar.secure_url = result.secure_url
           // Remove file from server (delete file from local )
           // humhe cloudinary me rakhni hai file
-         fs.rm(`uploads/${req.file.filename}`)
+         await fs.rm(`uploads/${req.file.filename}`)
         }
       } catch (err) {
        return next(new AppError(err || 'File not uploaded, please try again', 400))

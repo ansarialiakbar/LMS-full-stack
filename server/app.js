@@ -35,8 +35,8 @@ app.use(
   cors({
     origin: process.env.CLIENT_URL, // Your frontend's domain
     credentials: true, // Allow cookies and credentials
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Customize as needed
+    // methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allowed methods
+    // allowedHeaders: ['Content-Type', 'Authorization'], // Customize as needed
   })
 );
 app.use(cookieParser())

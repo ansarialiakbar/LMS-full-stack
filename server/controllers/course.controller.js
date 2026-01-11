@@ -82,7 +82,7 @@ const createCourse= async (req, res, next)=>{
         course.thumbnail.secure_url = result.secure_url
       }
       // Removing uploaded file
-      fs.rm(`uploads/${req.file.filename}`)
+      await fs.rm(`uploads/${req.file.filename}`)
      } catch (e) {
       return next(new AppError(e.message, 500))
      }
@@ -286,7 +286,7 @@ const addLectureToCourseById = async(req, res, next)=>{
       }
 
       // After successful upload remove the file from local storage
-      fs.rm(`uploads/${req.file.filename}`);
+      await fs.rm(`uploads/${req.file.filename}`);
     } catch (error) {
       // Empty the uploads directory without deleting the uploads directory
       for (const file of await fs.readdir('uploads/')) {
